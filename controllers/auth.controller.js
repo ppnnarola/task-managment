@@ -13,6 +13,7 @@ loginUser = (req, res, next) => {
   if (database === Default_database) {
     var findUserExist = "SELECT * FROM users WHERE email= ?";
     db.query(findUserExist, [email], function (err, user) {
+      console.log("user", user);
       if (!user[0]) {
         return res.status(404).json({ message: "User Not found." });
       }
