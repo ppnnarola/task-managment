@@ -29,7 +29,8 @@ const mongodbConnect = (callback) => {
 
 var mysql = require("mysql");
 var conn = mysql.createConnection({
-  host: "localhost",
+  // host: "localhost",
+  host: "127.0.0.1",
   user: "root",
   password: "password",
   database: "task-status",
