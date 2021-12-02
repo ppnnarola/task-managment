@@ -27,18 +27,18 @@ const mongodbConnect = (callback) => {
   var db = mongoose.connection;
 };
 
-var mysql = require("mysql");
-var conn = mysql.createConnection({
-  // host: "localhost",
-  host: "127.0.0.1",
-  user: "root",
-  password: "password",
-  database: "task-status",
-});
+// var mysql = require("mysql");
+// var conn = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   password: "password",
+//   database: "task-status",
+// });
 
-conn.connect(function (err) {
-  if (err) throw err;
-  console.log("Database is connected successfully !");
-});
+// conn.connect(function (err) {
+//   if (err) throw err;
+//   console.log("Database is connected successfully !");
+// });
 
-module.exports = database === Default_database ? conn : mongodbConnect;
+module.exports =
+  database === Default_database ? mongodbConnect : mongodbConnect;
