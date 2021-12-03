@@ -14,7 +14,7 @@ loginUser = (req, res, next) => {
     var findUserExist = "SELECT * FROM users WHERE email= ?";
     db.query(findUserExist, [email], function (err, user) {
       console.log("user", user);
-      if (!user[0]) {
+      if (user) {
         return res.status(404).json({ message: "User Not found." });
       }
       var passwordIsValid = bcrypt.compareSync(password, user[0].password);
@@ -74,7 +74,7 @@ registerUser = (req, res, next) => {
     let findUserExist = "SELECT * FROM users WHERE email =?";
     let sql = `INSERT INTO users (first_name, last_name, email, password) VALUES (?, ?, ?, ?)`;
     db.query(findUserExist, [email], function (err1, userResults) {
-      if (userResults.length) {
+      if (userResults?.length) {
         res.json({ message: userResults.message || "User already exist" });
       } else {
         db.query(
@@ -187,7 +187,7 @@ deleteUser = (req, res, next) => {
     var findUserExist = "SELECT * FROM users WHERE id= ?";
     var deletequery = "DELETE from users WHERE id = ?";
     db.query(findUserExist, [req.body.id], function (err, user) {
-      if (!user[0]) {
+      if (!user) {
         db.query(deletequery, [id], function (err, result) {
           if (err) {
             res.status(401).json({
