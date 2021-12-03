@@ -13,10 +13,10 @@ loginUser = (req, res, next) => {
   if (database === Default_database) {
     var findUserExist = "SELECT * FROM users WHERE email= ?";
     db.query(findUserExist, [email], function (err, user) {
-      console.log("user", user);
-      if (user) {
+      if (!user) {
         return res.status(404).json({ message: "User Not found." });
       }
+      console.log("user", user);
       var passwordIsValid = bcrypt.compareSync(password, user[0].password);
 
       if (!passwordIsValid) {
