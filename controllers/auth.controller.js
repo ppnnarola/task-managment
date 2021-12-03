@@ -75,14 +75,14 @@ registerUser = (req, res, next) => {
     let sql = `INSERT INTO users (first_name, last_name, email, password) VALUES (?, ?, ?, ?)`;
     db.query(findUserExist, [email], function (err1, userResults) {
       if (userResults?.length) {
-        res.json({ message: userResults.message || "User already exist" });
+        res.json({ message: "User already exist" });
       } else {
         db.query(
           sql,
           [first_name, last_name, email, password],
           function (err, result) {
             // if (err) throw err;
-            res.json({ message: result.message || "Registration successfull" });
+            res.json({ message: "Registration successfull" });
           }
         );
       }
@@ -141,21 +141,19 @@ updateUser = (req, res, next) => {
               [{ ...req.body, password: password }, id],
               function (err, result) {
                 res.status(200).json({
-                  message: result.message || "User Updated Successfully!",
+                  message: "User Updated Successfully!",
                 });
               }
             );
           } else {
             res.status(200).json({
-              message:
-                response.message ||
-                "Email already register! Please try with other email",
+              message: "Email already register! Please try with other email",
             });
           }
         });
       } else {
         res.status(200).json({
-          message: user.message || "User not exist!!",
+          message: "User not exist!!",
         });
       }
     });
@@ -191,14 +189,13 @@ deleteUser = (req, res, next) => {
         db.query(deletequery, [id], function (err, result) {
           if (err) {
             res.status(401).json({
-              message:
-                result.message || "Something went wrong! Try again later",
+              message: "Something went wrong! Try again later",
             });
           }
           res.status(200).json({ message: "User Deleted Successfully!" });
         });
       } else {
-        res.status(401).json({ message: user.message || "User Not exist!" });
+        res.status(401).json({ message: "User Not exist!" });
       }
     });
   } else {
