@@ -81,7 +81,7 @@ registerUser = (req, res, next) => {
           sql,
           [first_name, last_name, email, password],
           function (err, result) {
-            if (err) throw err;
+            // if (err) throw err;
             res.json({ message: result.message || "Registration successfull" });
           }
         );
