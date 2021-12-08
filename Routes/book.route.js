@@ -15,5 +15,10 @@ router.put(
   [authJwt.verifyToken],
   bookController.updateBookById
 );
+router.delete(
+  "/deletebookbyid",
+  [authJwt.verifyToken],
+  bookController.deleteBookById
+);
 
 module.exports = router;

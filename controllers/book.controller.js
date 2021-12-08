@@ -52,9 +52,22 @@ updateBookById = (req, res, next) => {
     .catch(next);
 };
 
+deleteBookById = (req, res, next) => {
+  BookModal.findOneAndDelete({ _id: req.body.id }, req.body)
+    .then((result) => {
+      if (result) {
+        res.status(200).send({ message: "Book delete successfully!!" });
+      } else {
+        res.status(200).send({ message: "Book not found!!" });
+      }
+    })
+    .catch(next);
+};
+
 module.exports = {
   addBook: addBook,
   getBooksByUserId: getBooksByUserId,
   getAllBooks: getAllBooks,
   updateBookById: updateBookById,
+  deleteBookById: deleteBookById,
 };
